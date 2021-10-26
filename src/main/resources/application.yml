@@ -1,0 +1,46 @@
+#Main settings
+spring.main.banner-mode: console
+spring.banner.location: classpath:app-banner.txt
+
+spring.application.name: epayment-data-exchange
+spring.jackson.serialization.indent_output: true
+server.port: 8080
+
+info:
+  name: ${spring.application.name}
+  description: Customs digital payment data exchange
+  environment: ${spring.profiles.active}
+  version: 0.0.1
+
+#Proxy settings
+proxy:
+  url: https://apigatewaytest.unionpayintl.com
+  PathKeyExchange: /uags/api/v1/exchange
+  PathINQUIRY_EXCHANGERATE : /umts/iswitch/v1/inquiry/exchangerate
+  PathCREDIT_VERIFY : /umts/iswitch/v1/creditverify
+  PathPRIMERY_CREDIT : /umts/iswitch/v1/credit
+  PathINQUIRY_MESSAGE : /umts/iswitch/v1/inquiry/message
+  buffer-size: 10000000
+
+# Certificate settings
+cert:
+  JWEKid : 1562032885962
+  JWSKid : 379326499248820106081235601112670776256463256664
+  DCAppId : 44560762
+
+# logging
+#logging.pattern.console: %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+logging:
+  file:
+    path: log
+    name: log/app.log
+    max-history: 365
+    max-size: 10000000
+  level:
+    customs.payment.service: DEBUG
+    com.zaxxer.hikari: WARN
+
+debug: false
+
+
+spring.output.ansi.enabled:  always
