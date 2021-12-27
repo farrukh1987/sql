@@ -1,11 +1,11 @@
 package com.dc.sql.Controller;
 
+import com.dc.sql.Controller.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    @Query("SELECT Account FROM Account")
-    Customer updateCustomer(Customer customer);
+    ////@Query("SELECT payid FROM oper")
+    //Customer updateCustomer(Customer customer);
+
+
 }
