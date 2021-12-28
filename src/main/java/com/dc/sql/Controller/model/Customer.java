@@ -55,7 +55,4 @@ public class Customer implements java.io.Serializable {
         return "Customer [id=" + payid +  ",term="+term+",code="+code+"]";
     }
 
-    public Iterable<Object> values() {
-        return "Customer [id=" + payid +  ",term="+term+",code="+code+"]";
-    }
 }
