@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.net.ssl.SSLException;
 
-import static com.dc.sql.client.Client.createWebClient;
+//import static com.dc.sql.client.Client.createWebClient;
 
 @SpringBootApplication
 @EnableScheduling
@@ -43,7 +43,7 @@ public class SqlConnectionApplication implements CommandLineRunner {
 	//
 	@Scheduled(cron = "0 0/23 21 * * *")
 	public void updateTaxiOlu4aID() throws SSLException {
-		createWebClient(proxyUrl, proxyBufferSize).get();
+		//createWebClient(proxyUrl, proxyBufferSize).get();
 				//.uri(PathINQUIRY_MESSAGE)
 				//.contentType(MediaType.APPLICATION_JSON)
 				//.body(BodyInserters.fromValue(request))
