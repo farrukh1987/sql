@@ -36,7 +36,7 @@ public class Client implements WebFluxConfigurer
         ClientHttpConnector connector = new ReactorClientHttpConnector(httpClient.wiretap(true));
 
         return WebClient.builder()
-                .baseUrl("http://localhost:3000")
+                .baseUrl("http://10.0.0.121:808/Olu4a/Olu4a.php?format=xml&articul=1181&amount=0&action=get_drivers_info&Ans=987&driver_id=1171&inputdate=200325135915")
                 .clientConnector(connector)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
