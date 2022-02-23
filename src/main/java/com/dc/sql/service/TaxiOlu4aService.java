@@ -1,23 +1,33 @@
 package com.dc.sql.service;
 
-import com.dc.sql.database.TaxiOlu4a;
+import com.dc.sql.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.beans.factory.annotation.Value;
 import reactor.core.publisher.Flux;
+
+import javax.net.ssl.SSLException;
 
 import java.time.Duration;
 
 public class TaxiOlu4aService {
 
-    @Autowired
-    WebClient webClient;
+    @Value("${proxy.url}")
+    private String proxyUrl;
+    @Value("${proxy.buffer-size:10000000}")
+    private int proxyBufferSize;
 
-    public Flux<TaxiOlu4a> findAll()
-    {
-        return webClient.get()
-                .uri("/get_drivers_info")
+    @Autowired
+    Client webClient;
+
+    public Flux<String> findAll() throws SSLException {
+        return webClient.createWebClient(proxyUrl, proxyBufferSize)
+                .get()
+                //.uri(PathINQUIRY_EXCHANGERATE)  //     /uags/api/v1/exchange
+                //.contentType(MediaType.APPLICATION_JSON)
+                //.body(BodyInserters.fromValue(request))  // msgID
+                //.header("UPI-JWS",getupijws.getContent() )
                 .retrieve()
-                .bodyToFlux(TaxiOlu4a.class)
-                .timeout(Duration.ofMillis(10_000));
+                .bodyToFlux(String.class)
+                .timeout(Duration.ofMillis(60_000));
     }
 }

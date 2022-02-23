@@ -1,44 +1,17 @@
 package com.dc.sql.client;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ClientHttpConnector;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.web.reactive.config.EnableWebFlux;
-import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.apache.logging.log4j.ThreadContext;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
-import reactor.netty.http.client.HttpClient;
+import javax.net.ssl.SSLException;
 
-@Configuration
-@EnableWebFlux
-public class Client implements WebFluxConfigurer
-{
-    Logger logger = LoggerFactory.getLogger(Client.class);
+public class Client {
 
-    @Bean
-    public WebClient getWebClient()
-    {
-        HttpClient httpClient = HttpClient.create()
-                .tcpConfiguration(client ->
-                        client.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
-                                .doOnConnected(conn -> conn
-                                        .addHandlerLast(new ReadTimeoutHandler(10))
-                                        .addHandlerLast(new WriteTimeoutHandler(10))));
-
-        ClientHttpConnector connector = new ReactorClientHttpConnector(httpClient.wiretap(true));
-
-        return WebClient.builder()
-                .baseUrl("http://10.0.0.121:808/Olu4a/Olu4a.php?format=xml&articul=1181&amount=0&action=get_drivers_info&Ans=987&driver_id=1171&inputdate=200325135915")
-                .clientConnector(connector)
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
+    public static WebClient createWebClient(String url, int bufferSize) throws SSLException  {
+        ExchangeStrategies exchangeStrategies = ExchangeStrategies.builder()
+                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(bufferSize)).build();
+        return WebClient.builder().exchangeStrategies(exchangeStrategies).baseUrl(url).build();
     }
+
 }
