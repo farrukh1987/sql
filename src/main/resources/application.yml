@@ -42,6 +42,6 @@ logging:
     customs.payment.service: DEBUG
     com.zaxxer.hikari: WARN
 
-debug: false
+debug: true
 
 spring.output.ansi.enabled:  always

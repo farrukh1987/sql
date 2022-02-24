@@ -3,6 +3,7 @@ package com.dc.sql.service;
 import com.dc.sql.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import reactor.core.publisher.Flux;
 
 import javax.net.ssl.SSLException;
@@ -21,9 +22,9 @@ public class TaxiOlu4aService {
 
     public Flux<String> findAll() throws SSLException {
         return webClient.createWebClient(proxyUrl, proxyBufferSize)
-                .get()
+                .post()
                 //.uri(PathINQUIRY_EXCHANGERATE)  //     /uags/api/v1/exchange
-                //.contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
                 //.body(BodyInserters.fromValue(request))  // msgID
                 //.header("UPI-JWS",getupijws.getContent() )
                 .retrieve()
