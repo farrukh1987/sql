@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Calendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.dc.sql.database.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,9 +21,13 @@ import javax.net.ssl.SSLException;
 
 //import static com.dc.sql.client.Client.createWebClient;
 
+
+
 @SpringBootApplication
 @EnableScheduling
 public class SqlConnectionApplication implements CommandLineRunner {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${proxy.url}")
 	private String proxyUrl;
@@ -107,4 +113,6 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		} catch (IOException e) {
 		}
 	}*/
+
+
 }
