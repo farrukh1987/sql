@@ -3,7 +3,6 @@ package com.dc.sql;
 import java.time.Duration;
 import java.util.List;
 import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.dc.sql.database.Customer;
@@ -39,6 +38,12 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		//SpringApplication app = new SpringApplication(SqlConnectionApplication.class);
 		//app.run(args);
 	}
+
+	@Scheduled(fixedDelayString = "5000")
+	void testFixedDelayString() {
+		System.out.println("Execute at " + System.currentTimeMillis());
+	}
+
 	//@Scheduled(initialDelay = 1000, fixedRate = 10000)
 	// "0 0 * * * *" = the top of every hour of every day.
 	// "*/10 * * * * *" = every ten seconds.
@@ -47,7 +52,7 @@ public class SqlConnectionApplication implements CommandLineRunner {
 	// "0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
 	// "0 0 0 25 12 ?" = every Christmas Day at midnight
 	//
-	@Scheduled(cron = "0 0/23 21 * * *")
+	 @Scheduled(cron = "0 0 * * * *")
 	public void updateTaxiOlu4aID() throws SSLException {
 		//createWebClient(proxyUrl, proxyBufferSize).get();
 				//.uri(PathINQUIRY_MESSAGE)
@@ -65,9 +70,9 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		//customers.forEach(System.out :: println);
 	}
 
-	@Scheduled(cron = "0 0/40 15 * * *")
+	@Scheduled(cron = "*/59 * * * * *")
 	public void select() {
-		String sql = "SELECT payid,term,code FROM oper;";
+		String sql = "SELECT payid,term,code FROM oper WHERE INPUTDATE LIKE '220323224755%';";
 		List<Customer> customers = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(Customer.class));
 		//writeToCSV(customers);
@@ -80,7 +85,7 @@ public class SqlConnectionApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Current time is :: " + Calendar.getInstance().getTime());
+		//System.out.println("Current time is :: " + Calendar.getInstance().getTime());
 	}
 
 	/*public static void writeToCSV(List<Customer> objectList) {
@@ -113,6 +118,4 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		} catch (IOException e) {
 		}
 	}*/
-
-
 }
