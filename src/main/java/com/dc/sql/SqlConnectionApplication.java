@@ -70,9 +70,9 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		//customers.forEach(System.out :: println);
 	}
 
-	@Scheduled(cron = "*/59 * * * * *")
+	@Scheduled(cron = "0 0 * * * *")
 	public void select() {
-		String sql = "SELECT payid,term,code FROM oper WHERE INPUTDATE LIKE '220323224755%';";
+		String sql = "SELECT payid,term,code FROM Autoexpress.dbo.oper WHERE INPUTDATE LIKE '220323224755%';";
 		List<Customer> customers = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(Customer.class));
 		//writeToCSV(customers);
