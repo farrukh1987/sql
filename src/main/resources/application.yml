@@ -16,8 +16,8 @@ info:
 proxy:
   #url: http://10.0.0.121:808/Olu4a/Olu4a.php?format=xml&articul=1181&amount=0&action=get_drivers_info&Ans=987&driver_id=1171&inputdate=200325135915
   #url: http://109.74.70.51:5058/test.asp?command=getbalance&login=90121&sign=2a9e2419fec4437c303ec7579bd159f5
-  url: https://bft-alpha.55fly.ru/api/order-public?company_req_id=6&order_id=100000
-  PathKeyExchange: /uags/api/v1/exchange
+  url: https://bft-alpha.55fly.ru
+  PathKeyExchange: /api/order-public?company_req_id=6&order_id=100000
   PathINQUIRY_EXCHANGERATE : /umts/iswitch/v1/inquiry/exchangerate
   PathCREDIT_VERIFY : /umts/iswitch/v1/creditverify
   PathPRIMERY_CREDIT : /umts/iswitch/v1/credit
@@ -42,6 +42,6 @@ logging:
     customs.payment.service: DEBUG
     com.zaxxer.hikari: WARN
 
-debug: false
+debug: true
 
 spring.output.ansi.enabled:  always

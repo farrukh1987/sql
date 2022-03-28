@@ -1,10 +1,8 @@
 package com.dc.sql;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Calendar;
 
-import com.dc.sql.database.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -30,8 +28,6 @@ public class SqlConnectionApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SqlConnectionApplication.class, args);
-		//SpringApplication app = new SpringApplication(SqlConnectionApplication.class);
-		//app.run(args);
 	}
 	//@Scheduled(initialDelay = 1000, fixedRate = 10000)
 	// "0 0 * * * *" = the top of every hour of every day.
@@ -59,7 +55,7 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		//customers.forEach(System.out :: println);
 	}
 
-	@Scheduled(cron = "0 0/40 15 * * *")
+	/*@Scheduled(cron = "0 0/40 15 * * *")
 	public void select() {
 		String sql = "SELECT payid,term,code FROM oper;";
 		List<Customer> customers = jdbcTemplate.query(sql,
@@ -67,7 +63,7 @@ public class SqlConnectionApplication implements CommandLineRunner {
 		//writeToCSV(customers);
 		System.out.println("Current time is :: " + Calendar.getInstance().getTime());
 		customers.forEach(System.out :: println);
-	}
+	}*/
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
